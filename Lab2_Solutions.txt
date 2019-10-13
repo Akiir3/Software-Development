@@ -1,0 +1,35 @@
+Erika I. Bailon
+step 2)
+1. diff fruits_v1.txt fruits_v2.txt
+The fruits are Cranberry, Jackfruit, Nectarine, Pricly Pear
+2.The < means the lines in fruits_v1 and > means the lines in fruits_v2
+3. -c command gives you a list with the words before and after the word that is not in either of the files but is on the other one, and the beginning it tells you how they represent it with either a + or a -
+step 3)
+1. wc -l password_demo.txt  //it has 15 lines
+2. wc -m password_demo.txt //it has 692 characters 
+step 4)
+1. cut -d: -f1 password_demo.txt //printed the first column or first field
+2. cut -d' ' -f2,4 grades.txt
+step 5)
+1. cut -f4 -d: password_demo.txt | sort -n -u
+2. cut -f4 -d: password_demo.txt | sort -n -u > ~/file 
+3. cut -d: -f1 password_demo.txt | egrep '^(m|w|s)'
+step 6)
+1. sed 's/[a-z]//g' cryptic.txt //to remove all the letters
+   sed 's/[0-9]//g' cryptic.txt //to remove all the numbers
+   sed 's/[0-9]/'_'/g' cryptic.txt  //to replace all numbers
+2. sed 's/0/o/g' cryptic.txt|sed 's/4/a/g' | sed 's/3/e/g' | sed 's/7/t/g'| sed 's/1/i/g' | sed 's/5/s/g'
+3. You create a file with termination .sed and then you use the command 
+   sed -f file.sed cryptic.txt
+  and it will print the line with the characters changed
+  if you want to run the same commands with another file, you just
+  have to change the name of the .txt file you wanna run with those commands
+  of seed ... for example sed -f file.sed anotherfile.txt and it will do it
+step 7)
+1.awk '{print $1, $2, (NR>1 ? gsub(1,1)/(NF>=2): "Average")} grades.txt
+2. awk '{print $1, $2, (NR>1 ? gsub(1,1)/(NF-1): "Average")} grades.txt
+step 8)
+1. grep '[0-9]\{3\}[-]' regex_practice_data.txt | wc -l  //it said there was 770 phone numbers
+2.grep '[303]\{3\}[-][441]' regex_practice_data.txt | wc -l  //it said there was 82 phone numbers
+3.grep '[@]' regex_practice_data.txt | wc -l  //it said there was 17706 email addresses
+4.grep '\.gov$' regex_practice_data.txt | wc -l // it said there were 52 .gov emails

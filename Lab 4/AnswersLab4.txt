@@ -1,0 +1,61 @@
+Erika I. Bailon 
+108-58-4251
+
+Questions PART 1
+ 
+1. Used #div1 in the css file to give the color property at div1. Used the hash 
+because div1 has an id inside of div, so it only changes div1 after the hash. 
+#div1
+{
+	background-color: blue;
+}
+
+2. With margin you change the distance between the boxes and also the distance with the edges of the page, 
+not only in between the boxes but also with the margin of the screen/page. So basically is the space outside the boxes. 
+With padding changes the size of each box because is the space between elements inside of the boxes. It changes the space inside.
+
+3. If you change the padding and margin of the yellow p, the box with those dimensions gets out of the black margins. So now
+we have a yellow box outside of the box where it was originally. 
+
+4.If you do overflow hidding - you cannot see the part of the yellow box inside of the orginal box with black margin. So you can 
+only see a little piece of the yellow box in the bottom right corner of the original box.
+If you do sroll- scrolling bars appear on the bottom and on the right of the divbox/the original box, so you can scroll down and up and left 
+and right to be able to see all the content on the yellow box. 
+
+5. If you do float left - then all the boxes are aligned in the top-left corner of the page and the order is 1 -2 - 3;
+If you do the right float - then all the boxes are aligned in the top-right corner of the page and the order is 3 -2 -1. 
+ 
+6. Doing this one by one, was really cool because it moves the 1st div to the left-top corner of the page while all the other boxes
+are left on the right-top corner as they were int he reverse order. You can see how you move one by one to the top-left corner and 
+they are now in the right order. They are all still aligned all at the top. 
+
+7. To get the path in the page you give float:left TO ALL of the divs and then you give clear:left to div3 so it bring it to the next line 
+because it doens't want anything on the left so now we get 1 and 2 in the top-left corner, and 3 right above the number 1. The propierty was
+#div3
+{
+	clear: left;
+}
+
+8. With this, it basically deletes all the margins with the page, so the boxes are at 0 distance from the top and the left margin of the page. All the boxes 
+are aligned with the page without nay distance in between them.  This tells me about the default margin value that it actually exists and there is a set margin
+for the body that is not declared, we cannot see it, but the margin exists before we modify it.
+body
+{
+	margin: 0px;
+}
+
+PART 2
+1.Changed font of letters
+2.Changed color of each paragraph
+3.Changed margin on the menu so is not all to the left 
+4.Gave a Title fo each section on the text info div
+5.Displaying a title in the browser tab!!! really cool 
+6.Added symbols to the titles of each div of my info text
+7.Used huber to change the way of the links
+8.Created a title for the page too
+9.Change the font and shading of the title
+10.Changed the color and rounded the edges of the info text border
+
+
+
+

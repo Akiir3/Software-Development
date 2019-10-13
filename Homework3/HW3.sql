@@ -1,0 +1,18 @@
+select LastName, FirstName from nwEmployees WHERE (Country != 'USA' AND HireDate < '2013-03-13') ORDER BY LastName;
+select ProductID, ProductName, QuantityPerUnit, UnitPrice from nwProducts WHERE UnitsInStock >= 1 AND UnitsInStock <= ReorderLevel;
+select ProductName, UnitPrice from nwProducts WHERE UnitPrice = (SELECT MAX(UnitPrice) FROM nwProducts);
+select ProductID, ProductName, concat(UnitsInStock, UnitPrice) as TotalInventoryValue from nwProducts WHERE (UnitsInStock*UnitPrice) > 2000 order by TotalInventoryValue DESC;
+select ShipCountry, COUNT(OrderID) as count from nwOrders WHERE ShipCountry != 'USA' AND (ShippedDate BETWEEN '2013-09-01' AND '2013-09-31') GROUP BY ShipCountry ORDER BY count;
+select c.CustomerID, CompanyName from nwCustomers c left outer join nwOrders o ON c.CustomerID = o.CustomerID GROUP BY CustomerID HAVING COUNT(OrderID) > 20;
+select SupplierID, sum(UnitsInStock*UnitPrice) as ValueOfInventory from nwProducts GROUP BY SupplierID HAVING COUNT(ProductID) > 3;
+select CompanyName, ProductName, UnitPrice from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID WHERE Country = 'USA' ORDER BY UnitPrice DESC;
+select LastName, FirstName, Title, Extension, COUNT(nwOrders.EmployeeID) as NumberOfOrders from nwEmployees join nwOrders on nwEmployees.EmployeeID = nwOrders.EmployeeID GROUP BY nwOrders.EmployeeID HAVING COUNT(OrderID) > 100 ORDER BY LastName;
+select CustomerID, CompanyName from nwCustomers WHERE nwCustomers.CustomerID NOT IN (select CustomerID from nwOrders);
+select CompanyName, ContactName, CategoryName, Description, ProductName, UnitsOnOrder from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID join nwCategories on nwProducts.CategoryID = nwCategories.CategoryID WHERE nwProducts.UnitsInStock = 0 ORDER BY CompanyName;
+select ProductName, CompanyName, Country, UnitsInStock from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID join nwCategories on nwProducts.CategoryID = nwCategories.CategoryID WHERE nwCategories.CategoryName = 'Beverages' ORDER BY ProductName;
+CREATE TABLE Top_Items (ItemID int NOT NULL, ItemCode int NOT NULL, ItemName varchar(40) NOT NULL, InventoryDate DATE NOT NULL, SupplierID int NOT NULL, ItemQuantity int NOT NULL, ItemPrice decimal (9,2) NOT NULL, PRIMARY KEY(ItemID));
+INSERT INTO Top_Items (ItemID, ItemCode, ItemName, InventoryDate, ItemQuantity, ItemPrice, SupplierID) SELECT ProductID, CategoryID, ProductName, '2018-03-18', UnitsInStock, UnitPrice, SupplierID FROM nwProducts WHERE (UnitPrice*UnitsInStock) > 2500;
+DELETE FROM Top_Items WHERE supplierID IN (SELECT s.supplierID FROM nwSuppliers s WHERE s.country = 'Canada');
+ALTER TABLE Top_Items ADD InventoryValue decimal(9,2) AFTER InventoryDate;
+UPDATE Top_Items SET InventoryValue = ItemQuantity*ItemPrice;
+DROP table Top_Items;

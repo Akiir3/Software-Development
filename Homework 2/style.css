@@ -1,0 +1,70 @@
+/* --- Erika BAILON --- */
+
+/* the css rules for grid.html */
+
+#div1{
+  
+	padding: 10px;
+	background-color: red;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 3cm;
+}
+
+#div2{
+	 
+	padding: 10px;
+	background-color: orange;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+	width: 7cm;
+}
+
+#div3{
+   
+	padding: 10px;
+	background-color: black;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 10cm;
+}
+
+#div4{
+  
+	padding: 10px;
+	background-color: green;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 13cm;
+}
+
+#div5{
+ 
+	padding: 10px;
+	background-color: blue;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 15cm;
+}
+
+#div6{
+  
+	padding: 10px;
+	background-color: purple;
+	font-weight: bold;
+	float: none;
+    margin: 0 auto;
+    text-align: center;
+    width: 18cm;
+}
+

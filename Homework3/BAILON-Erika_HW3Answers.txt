@@ -1,0 +1,208 @@
+Erika Bailon
+Eric OropezaElwood
+
+ANSWERS ...
+
+1. mysql> select LastName, FirstName from nwEmployees WHERE (Country != 'USA' AND HireDate < '2013-03-13') ORDER BY LastName;
++-----------+-----------+
+| LastName  | FirstName |
++-----------+-----------+
+| Dodsworth | Anne      |
+| King      | Robert    |
+| Suyama    | Michael   |
++-----------+-----------+
+3 rows in set (0.00 sec)
+
+2. mysql> select ProductID, ProductName, QuantityPerUnit, UnitPrice from nwProducts WHERE UnitsInStock >= 1 AND UnitsInStock <= ReorderLevel;
++-----------+----------------------------+---------------------+-----------+
+| ProductID | ProductName                | QuantityPerUnit     | UnitPrice |
++-----------+----------------------------+---------------------+-----------+
+|         2 | Chang                      | 24 - 12 oz bottles  |     19.00 |
+|         3 | Aniseed Syrup              | 12 - 550 ml bottles |     10.00 |
+|        11 | Queso Cabrales             | 1 kg pkg.           |     21.00 |
+|        21 | Sir Rodney's Scones        | 24 pkgs. x 4 pieces |     10.00 |
+|        30 | Nord-Ost Matjeshering      | 10 - 200 g glasses  |     25.89 |
+|        32 | Mascarpone Fabioli         | 24 - 200 g pkgs.    |     32.00 |
+|        37 | Gravad lax                 | 12 - 500 g pkgs.    |     26.00 |
+|        43 | Ipoh Coffee                | 16 - 500 g tins     |     46.00 |
+|        45 | Rogede sild                | 1k pkg.             |      9.50 |
+|        48 | Chocolade                  | 10 pkgs.            |     12.75 |
+|        49 | Maxilaku                   | 24 - 50 g pkgs.     |     20.00 |
+|        56 | Gnocchi di nonna Alice     | 24 - 250 g pkgs.    |     38.00 |
+|        64 | Wimmers gute Semmelknödel  | 20 bags x 4 pieces  |     33.25 |
+|        66 | Louisiana Hot Spiced Okra  | 24 - 8 oz jars      |     17.00 |
+|        68 | Scottish Longbreads        | 10 boxes x 8 pieces |     12.50 |
+|        70 | Outback Lager              | 24 - 355 ml bottles |     15.00 |
+|        74 | Longlife Tofu              | 5 kg pkg.           |     10.00 |
++-----------+----------------------------+---------------------+-----------+
+17 rows in set (0.00 sec)
+
+3. mysql> select ProductName, UnitPrice from nwProducts WHERE UnitPrice = (SELECT MAX(UnitPrice) FROM nwProducts);  +----------------+-----------+
+| ProductName    | UnitPrice |
++----------------+-----------+
+| Côte de Blaye  |    263.50 |
++----------------+-----------+
+1 row in set (0.00 sec)
+
+4. mysql> select ProductID, ProductName, concat(UnitsInStock, UnitPrice) as TotalInventoryValue from nwProducts WHERE (UnitsInStock*UnitPrice) > 2000 order by TotalInventoryValue DESC;
++-----------+------------------------------+---------------------+
+| ProductID | ProductName                  | TotalInventoryValue |
++-----------+------------------------------+---------------------+
+|        12 | Queso Manchego La Pastora    | 8638.00             |
+|        59 | Raclette Courdavault         | 7955.00             |
+|        27 | Schoggi Schokolade           | 4943.90             |
+|        18 | Carnarvon Tigers             | 4262.50             |
+|        20 | Sir Rodney's Marmalade       | 4081.00             |
+|         9 | Mishi Kobe Niku              | 2997.00             |
+|        38 | Côte de Blaye                | 17263.50            |
+|        40 | Boston Crab Meat             | 12318.40            |
+|         6 | Grandma's Boysenberry Spread | 12025.00            |
+|        55 | Pâté chinois                 | 11524.00            |
+|        61 | Sirop d'érable               | 11328.50            |
+|        36 | Inlagd Sill                  | 11219.00            |
+|        22 | Gustaf's Knäckebröd          | 10421.00            |
++-----------+------------------------------+---------------------+
+13 rows in set (0.00 sec)
+
+5. mysql> select ShipCountry, COUNT(OrderID) as count from nwOrders WHERE ShipCountry != 'USA' AND (ShippedDate BETWEEN '2013-09-01' AND '2013-09-31') GROUP BY ShipCountry ORDER BY count;
++-------------+-------+
+| ShipCountry | count |
++-------------+-------+
+| Germany     |     1 |
+| Sweden      |     1 |
+| Venezuela   |     1 |
+| Ireland     |     1 |
+| Spain       |     2 |
+| Italy       |     2 |
+| Mexico      |     3 |
+| France      |     3 |
+| Brazil      |     4 |
++-------------+-------+
+9 rows in set (0.00 sec)
+
+6. mysql> select c.CustomerID, CompanyName from nwCustomers c left outer join nwOrders o ON c.CustomerID = o.CustomerID GROUP BY CustomerID HAVING COUNT(OrderID) > 20;
++------------+--------------------+
+| CustomerID | CompanyName        |
++------------+--------------------+
+| ERNSH      | Ernst Handel       |
+| QUICK      | QUICK-Stop         |
+| SAVEA      | Save-a-lot Markets |
++------------+--------------------+
+3 rows in set (0.01 sec)
+
+7. mysql> select SupplierID, sum(UnitsInStock*UnitPrice) as ValueOfInventory from nwProducts GROUP BY SupplierID HAVING COUNT(ProductID) > 3;
++------------+------------------+
+| SupplierID | ValueOfInventory |
++------------+------------------+
+|          2 |          2833.80 |
+|          7 |          4409.65 |
+|          8 |          3575.00 |
+|         12 |          3301.85 |
++------------+------------------+
+4 rows in set (0.00 sec)
+
+8. mysql> select CompanyName, ProductName, UnitPrice from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID WHERE Country = 'USA' ORDER BY UnitPrice DESC;
++-----------------------------+----------------------------------+-----------+
+| CompanyName                 | ProductName                      | UnitPrice |
++-----------------------------+----------------------------------+-----------+
+| Grandma Kelly's Homestead   | Northwoods Cranberry Sauce       |     40.00 |
+| Grandma Kelly's Homestead   | Uncle Bob's Organic Dried Pears  |     30.00 |
+| Grandma Kelly's Homestead   | Grandma's Boysenberry Spread     |     25.00 |
+| New Orleans Cajun Delights  | Chef Anton's Cajun Seasoning     |     22.00 |
+| New Orleans Cajun Delights  | Chef Anton's Gumbo Mix           |     21.35 |
+| New Orleans Cajun Delights  | Louisiana Fiery Hot Pepper Sauce |     21.05 |
+| New England Seafood Cannery | Boston Crab Meat                 |     18.40 |
+| Bigfoot Breweries           | Steeleye Stout                   |     18.00 |
+| New Orleans Cajun Delights  | Louisiana Hot Spiced Okra        |     17.00 |
+| Bigfoot Breweries           | Sasquatch Ale                    |     14.00 |
+| Bigfoot Breweries           | Laughing Lumberjack Lager        |     14.00 |
+| New England Seafood Cannery | Jack's New England Clam Chowder  |      9.65 |
++-----------------------------+----------------------------------+-----------+
+12 rows in set (0.00 sec)
+
+9. mysql> PRINT 'SUPPLIER PRICE LIST' select LastName, FirstName, Title, Extension, COUNT(nwOrders.EmployeeID) as NumberOfOrders from nwEmployees join nwOrders on nwEmployees.EmployeeID = nwOrders.EmployeeID GROUP BY nwOrders.EmployeeID HAVING COUNT(OrderID) > 100 ORDER BY LastName;
++-----------+-----------+--------------------------+-----------+----------------+
+| LastName  | FirstName | Title                    | Extension | NumberOfOrders |
++-----------+-----------+--------------------------+-----------+----------------+
+| Callahan  | Laura     | Inside Sales Coordinator | 2344      |            104 |
+| Davolio   | Nancy     | Sales Representative     | 5467      |            123 |
+| Leverling | Janet     | Sales Representative     | 3355      |            127 |
+| Peacock   | Margaret  | Sales Representative     | 5176      |            156 |
++-----------+-----------+--------------------------+-----------+----------------+
+4 rows in set (0.01 sec)
+
+10. mysql> select CustomerID, CompanyName from nwCustomers WHERE nwCustomers.CustomerID NOT IN (select CustomerID from nwOrders); 
++------------+--------------------------------------+
+| CustomerID | CompanyName                          |
++------------+--------------------------------------+
+| FISSA      | FISSA Fabrica Inter. Salchichas S.A. |
+| PARIS      | Paris specialites                    |
++------------+--------------------------------------+
+2 rows in set (0.00 sec)
+
+11. mysql> select CompanyName, ContactName, CategoryName, Description, ProductName, UnitsOnOrder from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID join nwCategories on nwProducts.CategoryID = nwCategories.CategoryID WHERE nwProducts.UnitsInStock = 0 ORDER BY CompanyName;
++-------------------------------------+-----------------+----------------+------------------------------------------------------------+--------------------------+--------------+
+| CompanyName                         | ContactName     | CategoryName   | Description                                                | ProductName              | UnitsOnOrder |
++-------------------------------------+-----------------+----------------+------------------------------------------------------------+--------------------------+--------------+
+| Formaggi Fortini s.r.l.             | Elio Rossi      | Dairy Products | Cheeses                                                    | Gorgonzola Telino        |           70 |
+| G'day Mate                          | Wendy Mackenzie | Meat/Poultry   | Prepared meats                                             | Perth Pasties            |            0 |
+| New Orleans Cajun Delights          | Shelley Burke   | Condiments     | Sweet and savory sauces, relishes, spreads, and seasonings | Chef Anton's Gumbo Mix   |            0 |
+| Pavlova Ltd.                        | Ian Devling     | Meat/Poultry   | Prepared meats                                             | Alice Mutton             |            0 |
+| Plutzer Lebensmittelgroßmärkte AG   | Martin Bein     | Meat/Poultry   | Prepared meats                                             | Thüringer Rostbratwurst  |            0 |
++-------------------------------------+-----------------+----------------+------------------------------------------------------------+--------------------------+--------------+
+5 rows in set (0.01 sec)
+
+12. mysql> select ProductName, CompanyName, Country, UnitsInStock from nwSuppliers join nwProducts on nwSuppliers.SupplierID = nwProducts.SupplierID join nwCategories on nwProducts.CategoryID = nwCategories.CategoryID WHERE nwCategories.CategoryName = 'Beverages' ORDER BY ProductName;
++---------------------------+-------------------------------------+-----------+--------------+
+| ProductName               | CompanyName                         | Country   | UnitsInStock |
++---------------------------+-------------------------------------+-----------+--------------+
+| Chai                      | Exotic Liquids                      | UK        |           39 |
+| Chang                     | Exotic Liquids                      | UK        |           17 |
+| Chartreuse verte          | Aux joyeux ecclésiastiques          | France    |           69 |
+| Côte de Blaye             | Aux joyeux ecclésiastiques          | France    |           17 |
+| Guaraná Fantástica        | Refrescos Americanas LTDA           | Brazil    |           20 |
+| Ipoh Coffee               | Leka Trading                        | Singapore |           17 |
+| Lakkalikööri              | Karkki Oy                           | Finland   |           57 |
+| Laughing Lumberjack Lager | Bigfoot Breweries                   | USA       |           52 |
+| Outback Lager             | Pavlova Ltd.                        | Australia |           15 |
+| Rhönbräu Klosterbier      | Plutzer Lebensmittelgroßmärkte AG   | Germany   |          125 |
+| Sasquatch Ale             | Bigfoot Breweries                   | USA       |          111 |
+| Steeleye Stout            | Bigfoot Breweries                   | USA       |           20 |
++---------------------------+-------------------------------------+-----------+--------------+
+12 rows in set (0.00 sec)
+
+13. mysql> CREATE TABLE Top_Items (ItemID int NOT NULL, ItemCode int NOT NULL, ItemName varchar(40) NOT NULL, InventoryDate DATE NOT NULL, SupplierID int NOT NULL, ItemQuantity int NOT NULL, ItemPrice decimal (9,2) NOT NULL, PRIMARY KEY(ItemID));
+Query OK, 0 rows affected (0.02 sec)
+
+14. mysql> INSERT INTO Top_Items (ItemID, ItemCode, ItemName, InventoryDate, ItemQuantity, ItemPrice, SupplierID) SELECT ProductID, CategoryID, ProductName, '2018-03-18', UnitsInStock, UnitPrice, SupplierID FROM nwProducts WHERE (UnitPrice*UnitsInStock) > 2500;
+Query OK, 9 rows affected (0.00 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+15. mysql> DELETE FROM Top_Items WHERE supplierID IN (SELECT s.supplierID FROM nwSuppliers s WHERE s.country = 'Canada');
+Query OK, 2 rows affected (0.01 sec)
+
+16. mysql> ALTER TABLE Top_Items ADD InventoryValue decimal(9,2) AFTER InventoryDate;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+17. mysql> UPDATE Top_Items SET InventoryValue = ItemQuantity*ItemPrice;
+Query OK, 7 rows affected (0.00 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+18. mysql> DROP table Top_Items;
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

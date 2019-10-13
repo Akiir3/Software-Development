@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Hello</title>
+<script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+
+
+<p id="results">CSCI 3308, Alan Paradise, Spring 2018</p>
+<script>
+$(document).ready(function() {
+var url =
+'https://api.forecast.io/forecast/caa2fdb94aed3bf795df12dada0e6c39/40.014984,-105.270546'
+$.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+console.log(data)
+$('#results').text(data.currently.temperature)
+$('#result1').text(data.currently.summary)
+$('#result2').text(data.currently.humidity)
+})
+})
+</script>
+</head>
+<body>
+<p id="results">original</p>
+<p id="result1">result 1</p>
+<p id="result2">result 2</p>
+</body>
+</html>
+

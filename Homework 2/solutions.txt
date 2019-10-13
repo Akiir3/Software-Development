@@ -1,0 +1,13 @@
+**ERIKA BAILON**
+
+Q: What are the things needed for Bootstrap to be loaded?
+A: The Bootstrap needs a CDN(content delivery networks) these are code hostes. MaxCDN hosts the latest version and is the one used in this project.
+Also, jQuery is a library from JavaScript that is necessary for Bootstrap.
+
+Q:How does Bootstrap’s Grid system work? 
+A: Bootstrap’s Grid system works with containers that have columns, and rows. This allow us to have a nice front-end with a layout that
+can be used in different environments, like in a small screen on a phone, or medium screen in a tablet, or big scree in a computer. 
+Bootstrap can manage the sizes and how it looks on each size of screen by managing the width of the containers since it acts like a wrapper.
+Bootstrap also gives you the ability to easily create responsive designs by useing the properties of containers. No matter how the size change of the screen and the design of the webpage because the colimns and rows are a percentge
+so it adjust irself. The columns and rows have a feauture called padding, this allow the text to also be a percentage of the box they're in and 
+also the feature is fixed for the letters not the be over the lines of the edge. In a Boorstrap you can also nest inside the container.
